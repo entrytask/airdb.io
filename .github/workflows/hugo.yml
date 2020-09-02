@@ -1,0 +1,30 @@
+name: Hugo
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Hugo 
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: '0.74.3'
+        extended: true
+
+    - name: Build 
+      run: |
+        hugo -D --minify
+	echo airdb.io > ./public/CNAME
+
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GithubBotToken }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: ./public
