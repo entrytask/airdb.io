@@ -19,7 +19,7 @@ jobs:
     - name: Build 
       run: |
         hugo -D --minify
-        echo airdb.io > ./public/CNAME
+        echo entrytask.airdb.dev > ./public/CNAME
 
 
     - name: Deploy
